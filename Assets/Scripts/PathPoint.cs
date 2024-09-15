@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PathPoint : MonoBehaviour
 {
+    PathPoint[] pathPointToMoveOn;
     public PathPointParent pathPointParent;
     public List<PlayerPiece> playerPieceList = new List<PlayerPiece>();
 
@@ -12,7 +15,76 @@ public class PathPoint : MonoBehaviour
         pathPointParent = GetComponentInParent<PathPointParent>();
     }
 
-    public void AddPlayerPiece(PlayerPiece playerPiece)
+    public bool AddPlayerPiece(PlayerPiece playerPiece)
+    {
+        if (playerPieceList.Count == 1)
+        {
+            string prePlayerPieceName = playerPieceList[0].name;
+            string currlayerPieceName = playerPiece.name;
+            currlayerPieceName = currlayerPieceName.Substring(0, currlayerPieceName.Length - 4);
+
+            if (!prePlayerPieceName.Contains(currlayerPieceName))
+            {
+                playerPieceList[0].isReady = false;
+
+                StartCoroutine(RevertOnStart(playerPieceList[0]));
+
+                playerPieceList[0].numberOfStepsAlreadyMove = 0;
+                RemovePlayerPiece(playerPieceList[0]);
+                playerPieceList.Add(playerPiece);
+
+                return false;
+            }
+        }
+        AddPlayer(playerPiece);
+        return true;
+    }
+
+    IEnumerator RevertOnStart(PlayerPiece playerPiece)
+    {
+        if (playerPiece.name.Contains("Blue"))
+        {
+            GameManager.gm.blueOutPlayers -= 1;
+            pathPointToMoveOn = pathPointParent.bluePlayerPathPoints;
+        }
+        else if (playerPiece.name.Contains("Red"))
+        {
+            GameManager.gm.redOutPlayers -= 1;
+            pathPointToMoveOn = pathPointParent.redPlayerPathPoints;
+        }
+        else if (playerPiece.name.Contains("Green"))
+        {
+            GameManager.gm.greenOutPlayers -= 1;
+            pathPointToMoveOn = pathPointParent.greenPlayerPathPoints;
+        }
+        else if (playerPiece.name.Contains("Yellow"))
+        {
+            GameManager.gm.yellowOutPlayers -= 1;
+            pathPointToMoveOn = pathPointParent.yellowPlayerPathPoints;
+        }
+
+        for (int i = playerPiece.numberOfStepsAlreadyMove; i >= 0; i--)
+        {
+            playerPiece.transform.position = pathPointToMoveOn[i].transform.position;
+            yield return new WaitForSeconds(0.02f);
+        }
+
+        playerPiece.transform.position = pathPointParent.basePoints[BasePointPosition(playerPiece.name)].transform.position;
+    }
+
+    int BasePointPosition(string name)
+    {
+        for (int i = 0; i < pathPointParent.basePoints.Length; i++)
+        {
+            if (pathPointParent.basePoints[i].name == name)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    void AddPlayer(PlayerPiece playerPiece)
     {
         playerPieceList.Add(playerPiece);
         RescaleAndReositionAllPlayerPiece();

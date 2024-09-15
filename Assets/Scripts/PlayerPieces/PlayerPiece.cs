@@ -62,6 +62,7 @@ public class PlayerPiece : MonoBehaviour
 
     IEnumerator MoveStep_Enum(PathPoint[] pathPointsToMoveOn)
     {
+        yield return new WaitForSeconds(0.25f);
         numberOfStepsToMove = GameManager.gm.numberOfStepsToMove;
 
         for (int i = numberOfStepsAlreadyMove; i < (numberOfStepsAlreadyMove + numberOfStepsToMove); i++)

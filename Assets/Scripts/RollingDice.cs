@@ -54,6 +54,8 @@ public class RollingDice : MonoBehaviour
                 GameManager.gm.canRollDice = true;
                 GameManager.gm.selfDice = false;
                 GameManager.gm.transferDice = true;
+
+                yield return new WaitForSeconds(0.5f); // This holds dice for sometime before transfering to another turn
                 GameManager.gm.RollingDiceManager();
             }
 

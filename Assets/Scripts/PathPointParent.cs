@@ -10,6 +10,7 @@ public class PathPointParent : MonoBehaviour
     public PathPoint[] bluePlayerPathPoints;
     public PathPoint[] yellowPlayerPathPoints;
     public PathPoint[] greenPlayerPathPoints;
+    public PathPoint[] basePoints;
 
 
     [Header("Scale and Position Difference")]
