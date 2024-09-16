@@ -17,23 +17,27 @@ public class PathPoint : MonoBehaviour
 
     public bool AddPlayerPiece(PlayerPiece playerPiece)
     {
-        if (playerPieceList.Count == 1)
+        if (this.name == "Center Path") { Completed(playerPiece); }
+        if (this.name != "PathPoint" && this.name != "PathPoint (8)" && this.name != "PathPoint (13)" && this.name != "PathPoint (21)" && this.name != "PathPoint (26)" && this.name != "PathPoint (34)" && this.name != "PathPoint (39)" && this.name != "PathPoint (47)" && this.name != "Center Path")
         {
-            string prePlayerPieceName = playerPieceList[0].name;
-            string currlayerPieceName = playerPiece.name;
-            currlayerPieceName = currlayerPieceName.Substring(0, currlayerPieceName.Length - 4);
-
-            if (!prePlayerPieceName.Contains(currlayerPieceName))
+            if (playerPieceList.Count == 1)
             {
-                playerPieceList[0].isReady = false;
+                string prePlayerPieceName = playerPieceList[0].name;
+                string CurrPlayerPieceName = playerPiece.name;
+                CurrPlayerPieceName = CurrPlayerPieceName.Substring(0, CurrPlayerPieceName.Length - 4);
 
-                StartCoroutine(RevertOnStart(playerPieceList[0]));
+                if (!prePlayerPieceName.Contains(CurrPlayerPieceName))
+                {
+                    playerPieceList[0].isReady = false;
 
-                playerPieceList[0].numberOfStepsAlreadyMove = 0;
-                RemovePlayerPiece(playerPieceList[0]);
-                playerPieceList.Add(playerPiece);
+                    StartCoroutine(RevertOnStart(playerPieceList[0]));
 
-                return false;
+                    playerPieceList[0].numberOfStepsAlreadyMove = 0;
+                    RemovePlayerPiece(playerPieceList[0]);
+                    playerPieceList.Add(playerPiece);
+
+                    return false;
+                }
             }
         }
         AddPlayer(playerPiece);
@@ -63,7 +67,7 @@ public class PathPoint : MonoBehaviour
             pathPointToMoveOn = pathPointParent.yellowPlayerPathPoints;
         }
 
-        for (int i = playerPiece.numberOfStepsAlreadyMove; i >= 0; i--)
+        for (int i = playerPiece.numberOfStepsAlreadyMove - 1; i >= 0; i--)
         {
             playerPiece.transform.position = pathPointToMoveOn[i].transform.position;
             yield return new WaitForSeconds(0.02f);
@@ -97,6 +101,55 @@ public class PathPoint : MonoBehaviour
             playerPieceList.Remove(playerPiece);
             RescaleAndReositionAllPlayerPiece();
         }
+    }
+
+    private void Completed(PlayerPiece playerPiece)
+    {
+        if (playerPiece.name.Contains("Blue"))
+        {
+            GameManager.gm.blueCompletePlayers += 1;
+            GameManager.gm.blueOutPlayers -= 1;
+            
+            if (GameManager.gm.blueCompletePlayers == 4)
+            {
+                ShowCelebration();
+            }
+        }
+        else if (playerPiece.name.Contains("Red"))
+        {
+            GameManager.gm.redCompletePlayers += 1;
+            GameManager.gm.redOutPlayers -= 1;
+
+            if (GameManager.gm.redCompletePlayers == 4)
+            {
+                ShowCelebration();
+            }
+        }
+        else if (playerPiece.name.Contains("Green"))
+        {
+            GameManager.gm.greenCompletePlayers += 1;
+            GameManager.gm.greenOutPlayers -= 1;
+            
+            if (GameManager.gm.greenCompletePlayers == 4)
+            {
+                ShowCelebration();
+            }
+        }
+        else if (playerPiece.name.Contains("Yellow"))
+        {
+            GameManager.gm.yellowCompletePlayers += 1;
+            GameManager.gm.yellowOutPlayers -= 1;
+            
+            if (GameManager.gm.yellowCompletePlayers == 4)
+            {
+                ShowCelebration();
+            }
+        }
+    }
+
+    void ShowCelebration()
+    {
+
     }
 
     public void RescaleAndReositionAllPlayerPiece()

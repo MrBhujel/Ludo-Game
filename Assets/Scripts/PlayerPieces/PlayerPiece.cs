@@ -62,11 +62,13 @@ public class PlayerPiece : MonoBehaviour
 
     IEnumerator MoveStep_Enum(PathPoint[] pathPointsToMoveOn)
     {
+        GameManager.gm.transferDice = false;
         yield return new WaitForSeconds(0.25f);
         numberOfStepsToMove = GameManager.gm.numberOfStepsToMove;
 
         for (int i = numberOfStepsAlreadyMove; i < (numberOfStepsAlreadyMove + numberOfStepsToMove); i++)
         {
+            currentPathPoint.RescaleAndReositionAllPlayerPiece();
             if (IsPathPointAvailableToMove(numberOfStepsToMove, numberOfStepsAlreadyMove, pathPointsToMoveOn))
             {
                 transform.position = pathPointsToMoveOn[i].transform.position;
@@ -78,27 +80,39 @@ public class PlayerPiece : MonoBehaviour
         if (IsPathPointAvailableToMove(numberOfStepsToMove, numberOfStepsAlreadyMove, pathPointsToMoveOn))
         {
             numberOfStepsAlreadyMove += numberOfStepsToMove;
-            GameManager.gm.numberOfStepsToMove = 0;
 
             GameManager.gm.RemovePathPoint(previousPathPoint);
             previousPathPoint.RemovePlayerPiece(this);
 
             currentPathPoint = pathPointsToMoveOn[numberOfStepsAlreadyMove - 1];
-            currentPathPoint.AddPlayerPiece(this);
 
-            GameManager.gm.AddPathPoint(currentPathPoint);
-            previousPathPoint = currentPathPoint;
-
-            if (GameManager.gm.numberOfStepsToMove != 6)
+            if (currentPathPoint.AddPlayerPiece(this))
             {
-                GameManager.gm.selfDice = false;
-                GameManager.gm.transferDice = true;
+                if (numberOfStepsAlreadyMove == 57)
+                {
+                    GameManager.gm.selfDice = true;
+                }
+                else
+                {
+                    if (GameManager.gm.numberOfStepsToMove != 6)
+                    {
+                        GameManager.gm.transferDice = true;
+                    }
+                    else
+                    {
+                        GameManager.gm.selfDice = true;
+                    }
+                }
             }
             else
             {
                 GameManager.gm.selfDice = true;
-                GameManager.gm.transferDice = false;
             }
+
+            GameManager.gm.AddPathPoint(currentPathPoint);
+            previousPathPoint = currentPathPoint;
+
+
 
             GameManager.gm.numberOfStepsToMove = 0;
         }
