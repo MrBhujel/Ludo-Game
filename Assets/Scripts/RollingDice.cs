@@ -30,6 +30,7 @@ public class RollingDice : MonoBehaviour
 
     IEnumerator DiceRolling()
     {
+        GameManager.gm.transferDice = false;
         yield return new WaitForEndOfFrame();
 
         if (GameManager.gm.canRollDice)
@@ -146,7 +147,7 @@ public class RollingDice : MonoBehaviour
                 {
                     if (!canNotMove)
                     {
-                        canNotMove = true;
+                        canNotMove = false;
                     }
                 }
             }

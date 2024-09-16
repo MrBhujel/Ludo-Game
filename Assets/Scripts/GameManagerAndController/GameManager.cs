@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour
                 GameManager.gm.canRollDice = true;
             }
         }
+
+        
     }
 
     void ShiftDice()
