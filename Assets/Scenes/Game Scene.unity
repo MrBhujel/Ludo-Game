@@ -7050,11 +7050,36 @@ MonoBehaviour:
   redOutPlayers: 0
   greenOutPlayers: 0
   yellowOutPlayers: 0
+  blueCompletePlayers: 0
+  redCompletePlayers: 0
+  greenCompletePlayers: 0
+  yellowCompletePlayers: 0
   manageRollingDice:
   - {fileID: 2022190199}
   - {fileID: 1953932814}
   - {fileID: 1764684699}
   - {fileID: 1367619240}
+  bluePlayerPiece:
+  - {fileID: 1930983150}
+  - {fileID: 953102405}
+  - {fileID: 1497215311}
+  - {fileID: 1897939414}
+  redPlayerPiece:
+  - {fileID: 1468736696}
+  - {fileID: 1133312588}
+  - {fileID: 1095442068}
+  - {fileID: 1851024333}
+  greenPlayerPiece:
+  - {fileID: 904554941}
+  - {fileID: 1738239748}
+  - {fileID: 1879592838}
+  - {fileID: 991784511}
+  yellowPlayerPiece:
+  - {fileID: 1178743043}
+  - {fileID: 1088252174}
+  - {fileID: 1677505856}
+  - {fileID: 232508724}
+  totalPlayerCanPlay: 0
 --- !u!1001 &1133312585
 PrefabInstance:
   m_ObjectHideFlags: 0

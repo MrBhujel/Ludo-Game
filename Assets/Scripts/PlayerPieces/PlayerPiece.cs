@@ -66,9 +66,10 @@ public class PlayerPiece : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         numberOfStepsToMove = GameManager.gm.numberOfStepsToMove;
 
+        currentPathPoint.RescaleAndReositionAllPlayerPiece();
+
         for (int i = numberOfStepsAlreadyMove; i < (numberOfStepsAlreadyMove + numberOfStepsToMove); i++)
         {
-            currentPathPoint.RescaleAndReositionAllPlayerPiece();
             if (IsPathPointAvailableToMove(numberOfStepsToMove, numberOfStepsAlreadyMove, pathPointsToMoveOn))
             {
                 transform.position = pathPointsToMoveOn[i].transform.position;

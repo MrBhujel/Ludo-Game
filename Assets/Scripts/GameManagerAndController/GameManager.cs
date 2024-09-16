@@ -61,8 +61,10 @@ public class GameManager : MonoBehaviour
     {
         if (GameManager.gm.transferDice)
         {
-            ShiftDice();
-
+            if (GameManager.gm.numberOfStepsToMove != 6)
+            {
+                ShiftDice();
+            }
             GameManager.gm.canRollDice = true;
         }
         else
