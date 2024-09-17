@@ -28,6 +28,12 @@ public class RollingDice : MonoBehaviour
         generateRandomDiceRoll = StartCoroutine(DiceRolling());
     }
 
+    public void MouseRoll()
+    {
+        generateRandomDiceRoll = StartCoroutine(DiceRolling());
+    }
+
+
     IEnumerator DiceRolling()
     {
         GameManager.gm.transferDice = false;
@@ -91,8 +97,70 @@ public class RollingDice : MonoBehaviour
                     }
                     else if (outPiece == 1 && numberGot != 6 && GameManager.gm.canPlayerMove)
                     {
-                        GameManager.gm.canPlayerMove = false;
-                        moveSteps = StartCoroutine(MoveStep_Enum(0));
+                        int playerPiecePosition = CheckOutPlayer();
+                        if (playerPiecePosition >= 0)
+                        {
+                            GameManager.gm.canPlayerMove = false;
+                            moveSteps = StartCoroutine(MoveStep_Enum(playerPiecePosition));
+                        }
+                        else
+                        {
+                            yield return new WaitForSeconds(0.5f);
+
+                            if (numberGot != 6)
+                            {
+                                GameManager.gm.transferDice = true;
+                            }
+                            else
+                            {
+                                GameManager.gm.selfDice = true;
+                            }
+                        }
+                    }
+                    else if (GameManager.gm.totalPlayerCanPlay == 1 && GameManager.gm.rollingDice == GameManager.gm.manageRollingDice[2])
+                    {
+                        if (numberGot == 6 && outPiece < 4)
+                        {
+                            MakePlayerReadyToMove(OutPlayerToMove());
+                        }
+                        else
+                        {
+                            int playerPiecePosition = CheckOutPlayer();
+                            if (playerPiecePosition >= 0)
+                            {
+                                GameManager.gm.canPlayerMove = false;
+                                moveSteps = StartCoroutine(MoveStep_Enum(playerPiecePosition));
+                            }
+                            else
+                            {
+                                yield return new WaitForSeconds(0.5f);
+
+                                if (numberGot != 6)
+                                {
+                                    GameManager.gm.transferDice = true;
+                                }
+                                else
+                                {
+                                    GameManager.gm.selfDice = true;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (CheckOutPlayer() < 0)
+                        {
+                            yield return new WaitForSeconds(0.5f);
+
+                            if (numberGot != 6)
+                            {
+                                GameManager.gm.transferDice = true;
+                            }
+                            else
+                            {
+                                GameManager.gm.selfDice = true;
+                            }
+                        }
                     }
                 }
 
@@ -105,6 +173,51 @@ public class RollingDice : MonoBehaviour
                 StopCoroutine(generateRandomDiceRoll);
             }
         }
+    }
+
+    int OutPlayerToMove()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (!GameManager.gm.greenPlayerPiece[i].isReady)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    int CheckOutPlayer()
+    {
+        if (GameManager.gm.rollingDice == GameManager.gm.manageRollingDice[0])
+        {
+            currentPlayerPiece = GameManager.gm.bluePlayerPiece;
+            pathPointToMoveOn = pathParent.bluePlayerPathPoints;
+        }
+        else if (GameManager.gm.rollingDice == GameManager.gm.manageRollingDice[1])
+        {
+            currentPlayerPiece = GameManager.gm.redPlayerPiece;
+            pathPointToMoveOn = pathParent.redPlayerPathPoints;
+        }
+        else if (GameManager.gm.rollingDice == GameManager.gm.manageRollingDice[2])
+        {
+            currentPlayerPiece = GameManager.gm.greenPlayerPiece;
+            pathPointToMoveOn = pathParent.greenPlayerPathPoints;
+        }
+        else if (GameManager.gm.rollingDice == GameManager.gm.manageRollingDice[3])
+        {
+            currentPlayerPiece = GameManager.gm.yellowPlayerPiece;
+            pathPointToMoveOn = pathParent.yellowPlayerPathPoints;
+        }
+
+        for (int i = 0; i < currentPlayerPiece.Length; i++)
+        {
+            if (currentPlayerPiece[i].isReady && IsPathPointAvailableToMove(GameManager.gm.numberOfStepsToMove, currentPlayerPiece[i].numberOfStepsAlreadyMove, pathPointToMoveOn))
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public bool PlayerCanNotMove()
@@ -216,6 +329,7 @@ public class RollingDice : MonoBehaviour
         GameManager.gm.selfDice = true;
         GameManager.gm.transferDice = false;
         GameManager.gm.numberOfStepsToMove = 0;
+        GameManager.gm.SelfRoll();
 
     }
 
