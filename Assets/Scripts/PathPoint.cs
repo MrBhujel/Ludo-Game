@@ -10,6 +10,8 @@ public class PathPoint : MonoBehaviour
     public PathPointParent pathPointParent;
     public List<PlayerPiece> playerPieceList = new List<PlayerPiece>();
 
+    public PlayerCompleteSound playerCompleteSound;
+
     void Start()
     {
         pathPointParent = GetComponentInParent<PathPointParent>();
@@ -107,6 +109,7 @@ public class PathPoint : MonoBehaviour
     {
         if (playerPiece.name.Contains("Blue"))
         {
+            playerCompleteSound.PlaySound();
             GameManager.gm.blueCompletePlayers += 1;
             GameManager.gm.blueOutPlayers -= 1;
             
@@ -117,6 +120,7 @@ public class PathPoint : MonoBehaviour
         }
         else if (playerPiece.name.Contains("Red"))
         {
+            playerCompleteSound.PlaySound();
             GameManager.gm.redCompletePlayers += 1;
             GameManager.gm.redOutPlayers -= 1;
 
@@ -127,6 +131,7 @@ public class PathPoint : MonoBehaviour
         }
         else if (playerPiece.name.Contains("Green"))
         {
+            playerCompleteSound.PlaySound();
             GameManager.gm.greenCompletePlayers += 1;
             GameManager.gm.greenOutPlayers -= 1;
             
@@ -137,6 +142,7 @@ public class PathPoint : MonoBehaviour
         }
         else if (playerPiece.name.Contains("Yellow"))
         {
+            playerCompleteSound.PlaySound();
             GameManager.gm.yellowCompletePlayers += 1;
             GameManager.gm.yellowOutPlayers -= 1;
             
