@@ -73,7 +73,7 @@ public class PlayerPiece : MonoBehaviour
             if (IsPathPointAvailableToMove(numberOfStepsToMove, numberOfStepsAlreadyMove, pathPointsToMoveOn))
             {
                 transform.position = pathPointsToMoveOn[i].transform.position;
-
+                GameManager.gm.ads.Play();
                 yield return new WaitForSeconds(0.35f);
             }
         }

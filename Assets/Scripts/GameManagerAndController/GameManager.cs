@@ -34,10 +34,14 @@ public class GameManager : MonoBehaviour
     public PlayerPiece[] yellowPlayerPiece;
 
     public int totalPlayerCanPlay;
+    public int totalSix = 0;
+
+    public AudioSource ads;
 
     void Awake()
     {
         gm = this;
+        ads = GetComponent<AudioSource>();
     }
 
     public void AddPathPoint(PathPoint pathPoint)

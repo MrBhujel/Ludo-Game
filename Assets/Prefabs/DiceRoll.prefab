@@ -247,7 +247,9 @@ MonoBehaviour:
   numberSpriteHolder: {fileID: 6070483434785406535}
   diceRollAnimation: {fileID: 4508786658486120962}
   numberRolled: 0
-  canRollDice: 1
+  outPiece: 0
+  pathParent: {fileID: 0}
+  diceSound: {fileID: 0}
 --- !u!61 &251846144315208465
 BoxCollider2D:
   m_ObjectHideFlags: 0

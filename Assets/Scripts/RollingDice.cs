@@ -17,6 +17,8 @@ public class RollingDice : MonoBehaviour
     PathPoint[] pathPointToMoveOn;
     Coroutine moveSteps;
     PlayerPiece outPlayerPiece;
+    public Dice diceSound;
+    int maxNum = 6;
 
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class RollingDice : MonoBehaviour
 
     IEnumerator DiceRolling()
     {
+        diceSound.PlaySound();
         GameManager.gm.transferDice = false;
         yield return new WaitForEndOfFrame();
 
@@ -48,7 +51,19 @@ public class RollingDice : MonoBehaviour
 
             yield return new WaitForSeconds(0.8f);
 
-            numberRolled = Random.Range(0, 6);
+            if (GameManager.gm.totalSix == 2) {maxNum = 5;}
+
+            numberRolled = Random.Range(0, maxNum);
+
+            if (numberRolled == 6)
+            {
+                GameManager.gm.totalSix += 1;
+            }
+            else
+            {
+                GameManager.gm.totalSix = 0;
+            }
+
             numberSpriteHolder.sprite = numberSprites[numberRolled];
             numberRolled += 1;
 
@@ -368,7 +383,7 @@ public class RollingDice : MonoBehaviour
             if (IsPathPointAvailableToMove(numberOfStepsToMove, outPlayerPiece.numberOfStepsAlreadyMove, pathPointToMoveOn))
             {
                 outPlayerPiece.transform.position = pathPointToMoveOn[i].transform.position;
-
+                GameManager.gm.ads.Play();
                 yield return new WaitForSeconds(0.35f);
             }
         }
