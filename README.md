@@ -5,15 +5,15 @@
 A fun and interactive Ludo game built using Unity! This project is designed for Android but might work for PC also, featuring smooth gameplay, AI opponents, and local multiplayer options. 
 
 ## **Table of Contents**  
-- [Features](#features-✨)  
-- [Screenshots](#screenshots-📸)  
-- [Installation](#installation-🚀)
+- [Features](#features)  
+- [Screenshots](#screenshots)  
+- [Installation](#installation)
 - [Project Structure](#project-structure-inside-unity)
-- [How to Run](#how-to-run-▶️)  
-- [Build for Android](#build-for-android-📱)  
-- [Contributing](#contributing-🤝)  
-- [License](#license-📜)  
-- [Contact](#contact-📬)  
+- [How to Run](#how-to-run)  
+- [Build for Android](#build-for-android)  
+- [Contributing](#contributing)  
+- [License](#license)  
+- [Contact](#contact)  
 
 ---
 
