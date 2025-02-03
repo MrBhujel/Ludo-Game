@@ -17,7 +17,7 @@ A fun and interactive Ludo game built using Unity! This project is designed for 
 
 ---
 
-## **Features** ✨  
+## **Features**
 ✔️ Classic Ludo gameplay 🎲  
 ✔️ Single-player mode with AI 🤖  
 ✔️ Multiplayer mode (local) 🏆  
@@ -27,13 +27,13 @@ A fun and interactive Ludo game built using Unity! This project is designed for 
 
 ---
 
-## **Screenshots** 📸
+## **Screenshots**
  
 ![Game Screenshot](https://github.com/user-attachments/assets/ae166b08-4dbc-4dae-b969-ffa973b07194)
 
 ---
 
-## **Installation** 🚀
+## **Installation**
 
 ### **1. Clone the Repository**  
 You need Git installed. Run the following command in your terminal or command prompt:  
@@ -81,7 +81,7 @@ If you don't want to use GIT, you can manually download the project:
 
 ---
 
-## **How to Run** ▶️
+## **How to Run**
 - Click **File** > **Build Settings**.  
 - Select **PC, Mac & Linux Standalone** or **Android** based on your target platform.  
 - Click **Build and Run** to start playing.  
@@ -92,7 +92,7 @@ OR
 
 ---
 
-## **Build for Android** 📱
+## **Build for Android**
 To build the game for Android:  
 1. Go to **File** > **Build Settings**.  
 2. Select **Android** and click **Switch Platform**.  
@@ -102,7 +102,7 @@ To build the game for Android:
 
 ---
 
-## **Contributing** 🤝
+## **Contributing**
 Want to improve this game? Follow these steps:  
 1. **Fork** the repository.  
 2. Create a **new branch**:  
@@ -121,7 +121,7 @@ Want to improve this game? Follow these steps:
 
 ---
 
-## **LICENSE** 📜
+## **LICENSE**
 This project is licensed under the **MIT License** – [View License](#mit-license).  
 
 ---
@@ -151,7 +151,7 @@ SOFTWARE.
 ```
 ---
 
-## **Contact** 📬
+## **Contact**
 🌎 Website: [sambatbhujel.com.np](https://www.sambatbhujel.com.np)  
 
 ---
