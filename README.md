@@ -153,9 +153,4 @@ SOFTWARE.
 ```
 ---
 
-## **Contact**
-🌎 Website: [sambatbhujel.com.np](https://www.sambatbhujel.com.np)  
-
----
-
 > *Enjoy playing Ludo? Give this repo a ⭐ and contribute to make it even better!*
