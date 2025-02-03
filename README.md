@@ -1,6 +1,8 @@
 # **LUDO-GAME** 🎲  
+## **Ludo Game Made in Unity with C#**
 [![Unity Version](https://img.shields.io/badge/Unity-2022.3.26f1-blue.svg)](https://unity.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](#license)
+
 
 A fun and interactive Ludo game built using Unity! This project is designed for Android but might work for PC also, featuring smooth gameplay, AI opponents, and local multiplayer options. 
 
