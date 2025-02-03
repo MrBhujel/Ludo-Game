@@ -15,7 +15,6 @@ A fun and interactive Ludo game built using Unity! This project is designed for 
 - [Build for Android](#build-for-android)  
 - [Contributing](#contributing)  
 - [License](#license)  
-- [Contact](#contact)  
 
 ---
 
